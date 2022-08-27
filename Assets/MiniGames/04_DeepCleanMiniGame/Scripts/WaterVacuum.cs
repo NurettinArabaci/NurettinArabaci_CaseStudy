@@ -24,7 +24,7 @@ public class WaterVacuum : MovementController
 
     protected override void OnMouseUp()
     {
-        
+        //do nothing
     }
 
     private void FixedUpdate()

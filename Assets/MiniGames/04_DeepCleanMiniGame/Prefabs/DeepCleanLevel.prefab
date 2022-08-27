@@ -514,13 +514,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 8836462158557076562}
     m_Modifications:
     - target: {fileID: 123248896, guid: 862473dbb56b44166a896ef60f9c6244, type: 3}
+      propertyPath: cooldown
+      value: -5.373497
+      objectReference: {fileID: 0}
+    - target: {fileID: 123248896, guid: 862473dbb56b44166a896ef60f9c6244, type: 3}
       propertyPath: paintableTexture
       value: 
       objectReference: {fileID: 3460836629025575608}
     - target: {fileID: 123248896, guid: 862473dbb56b44166a896ef60f9c6244, type: 3}
       propertyPath: registeredPaintableTexture
       value: 
-      objectReference: {fileID: 3460836629025575608}
+      objectReference: {fileID: 0}
     - target: {fileID: 6095251288191909992, guid: 862473dbb56b44166a896ef60f9c6244, type: 3}
       propertyPath: m_Name
       value: Water_Vacuum
