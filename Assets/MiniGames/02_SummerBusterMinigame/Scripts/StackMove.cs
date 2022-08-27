@@ -47,7 +47,7 @@ public class StackMove : MonoBehaviour
     {
         gap = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position + HeadPose(poses[goPose]) - poses[goPose]);
         transform.DOMove(HeadPose(transform.position), 0.2f);
-        Delay.WaitForMe(() => moveDone = true, 0.2f);
+        NAEngine.Delay(() => moveDone = true, 0.2f);
 
     }
 
@@ -75,6 +75,6 @@ public class StackMove : MonoBehaviour
         moveDone = false;
         transform.DOMove(HeadPose(poses[goPose]), 0.4f);
         
-        Delay.WaitForMe(() => transform.DOMove(poses[goPose], 0.2f), 0.4f);
+        NAEngine.Delay(() => transform.DOMove(poses[goPose], 0.2f), 0.4f);
     }
 }
