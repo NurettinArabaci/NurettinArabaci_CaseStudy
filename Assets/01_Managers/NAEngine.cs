@@ -21,6 +21,10 @@ public class NAEngine : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// This method can delay any method you want.
+    /// </summary>
     public static Coroutine Delay(System.Action action, float duration)
     {
         return instance.StartCoroutine(instance.DelayCR(action, duration));
@@ -32,6 +36,10 @@ public class NAEngine : MonoBehaviour
         _action?.Invoke();
     }
 
+
+    /// <summary>
+    /// You can move to target position from the current position.
+    /// </summary>
     public static Coroutine MoveBySpeed(Transform tr, Vector3 targetPose, float speed)
     {
         return instance.StartCoroutine(instance.MoveBySpeedCR(tr, targetPose, speed));
@@ -39,7 +47,6 @@ public class NAEngine : MonoBehaviour
 
     IEnumerator MoveBySpeedCR(Transform _tr, Vector3 _targetPose, float _speed)
     {
-
         Vector3 _currentPose = _tr.position;
         float timeCounter = 0f;
 
@@ -52,8 +59,14 @@ public class NAEngine : MonoBehaviour
 
             yield return null;
         }
-
     }
+
+
+    /// <summary>
+    /// You can move to two different points in order.
+    /// Firstly the first position from the current position.
+    /// Then the second position from the first position.
+    /// </summary>
 
     public static Coroutine DoubleCheckpointMove(Transform tr, Vector3 firstPose, Vector3 secPose, float firstSpeed, float secSpeed)
     {

@@ -15,9 +15,9 @@ public class Money : MovementController
 
     bool isFinish = false;
 
-    protected override Vector3 ClampPose()
+    private void Start()
     {
-        return new Vector3(Mathf.Clamp(mT.position.x, -6, 6), 0f, Mathf.Clamp(mT.position.z, -5, 15));
+        moveHeight = 0;
     }
 
     protected override void OnMouseUp()

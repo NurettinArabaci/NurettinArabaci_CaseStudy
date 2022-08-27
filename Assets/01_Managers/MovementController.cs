@@ -9,10 +9,20 @@ public class MovementController : MonoBehaviour
     protected Vector3 gap;
     protected Vector3 initPose;
 
+    protected float moveHeight=0.1f;
+    protected float minX = -8;
+    protected float maxX = 6;
+    protected float minZ = -10;
+    protected float maxZ = 4;
+
+
     protected virtual void Awake()
     {
         mT = transform;
         initPose = mT.position;
+
+        CheckCollider();
+
     }
 
     protected virtual void OnMouseDown()
@@ -25,18 +35,27 @@ public class MovementController : MonoBehaviour
     {
         Vector3 smooth = Camera.main.ScreenToWorldPoint(Input.mousePosition - gap);
         mT.position = Vector3.MoveTowards(mT.position, smooth, 1f);
-
         mT.position = ClampPose();
 
     }
 
     protected virtual Vector3 ClampPose()
     {
-        return new Vector3(Mathf.Clamp(mT.position.x, -8, 6), 0.1f, Mathf.Clamp(mT.position.z, -10, 4));
+        return new Vector3(Mathf.Clamp(mT.position.x, minX, maxX), moveHeight, Mathf.Clamp(mT.position.z, minZ, maxZ));
     }
 
     protected virtual void OnMouseUp()
     {
         mT.DOMove(initPose, 0.3f);
+    }
+
+    void CheckCollider()
+    {
+        if (GetComponent<Collider>())
+        {
+            return;
+        }
+
+        Debug.LogError("Must add any collider");
     }
 }

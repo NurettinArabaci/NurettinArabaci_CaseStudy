@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MoneyHolder
   - PaperShredder
+  - Chips
   layers:
   - Default
   - TransparentFX
