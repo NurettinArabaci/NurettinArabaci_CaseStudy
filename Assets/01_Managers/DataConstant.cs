@@ -12,5 +12,6 @@ public class Tags
 
 public class AnimParam
 {
-
+    public const string MoneyStack = "MoneyStack"; 
+    public const string MoneyShredStart = "MoneyShredStart";
 }

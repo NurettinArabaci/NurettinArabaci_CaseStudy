@@ -7,9 +7,6 @@ public partial class EventManager
 {
     public static event System.Action OnMessageActive;
     public static void Fire_OnMessageActive() { OnMessageActive?.Invoke(); }
-
-    public static event System.Action OnMessageInActive;
-    public static void Fire_OnMessageInActive() { OnMessageInActive?.Invoke(); }
 }
 
 public class MessageCanvas : MonoBehaviour
@@ -17,7 +14,7 @@ public class MessageCanvas : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnMessageActive += OnMessageActive;
-        EventManager.OnMessageInActive += OnMessageInActive;
+        EventManager.OnStartGame += OnMessageInActive;
 
 
     }
@@ -41,6 +38,6 @@ public class MessageCanvas : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnMessageActive -= OnMessageActive;
-        EventManager.OnMessageInActive -= OnMessageInActive;
+        EventManager.OnStartGame -= OnMessageInActive;
     }
 }

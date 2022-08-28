@@ -22,10 +22,7 @@ public class WaterVacuum : MovementController
 
     }
 
-    protected override void OnMouseUp()
-    {
-        //do nothing
-    }
+    protected override void OnMouseUp() { }
 
     private void FixedUpdate()
     {

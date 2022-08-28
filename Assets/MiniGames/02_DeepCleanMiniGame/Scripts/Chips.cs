@@ -28,7 +28,7 @@ public class Chips : MonoBehaviour
 
         mT.DOScale(Vector3.zero, 0.5f);
 
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 1);
     }
 
     void CleanCompleted()
@@ -37,7 +37,7 @@ public class Chips : MonoBehaviour
 
         if (GameManager.chipsAmount<=0)
         {
-            Debug.Log("Change");
+            EventManager.Fire_OnChangeVacuum();
         }
     }
 

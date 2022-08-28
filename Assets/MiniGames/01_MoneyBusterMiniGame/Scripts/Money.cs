@@ -18,6 +18,7 @@ public class Money : MovementController
     private void Start()
     {
         moveHeight = 0;
+        maxZ = 5;
     }
 
     protected override void OnMouseUp()
@@ -43,42 +44,17 @@ public class Money : MovementController
 
         if (other.CompareTag(Tags.MoneyHolder))
         {
-            isFinish = true;
-            GetComponent<BoxCollider>().enabled = false;
-            mT.DORotate(Vector3.up * (-90), 0.2f);
-            NAEngine.DoubleCheckpointMove(mT, other.transform.position + Vector3.back * 10, other.transform.position ,1000,20);
+            MoveAnimation(other.transform, AnimParam.MoneyStack);
         }
-       /* if (other.CompareTag(Tags.MoneyHolder))
-        {
-            GetComponent<BoxCollider>().enabled = false;
-
-            other.GetComponent<Animator>().SetTrigger("MoneyStack");
-            MoveAnimation(other.transform, 12);
-            //Delay.WaitForMe(EventManager.Fire_OnLevelCompleted, 1.5f);
-
-            if (moneyType==MoneyType.Real)
-            {
-                 
-            }
-
-            else if (moneyType == MoneyType.Fake)
-            {
-                //Delay.WaitForMe(EventManager.Fire_OnLevelCompleted, 1f);
-                //Noo!  -10 coin
-            }
-        }*/
 
         else if (other.CompareTag(Tags.PaperShredder))
         {
-            GetComponent<BoxCollider>().enabled = false;
 
-            other.GetComponent<Animator>().SetTrigger("MoneyShredStart");
+            other.transform.DOShakePosition(1.2f,0.7f);
 
-            mT.parent = other.transform;
-            other.transform.DOShakePosition(1.2f, Vector3.up);
+            MoveAnimation(other.transform, AnimParam.MoneyShredStart);
 
-            MoveAnimation(other.transform, 14);
-            NAEngine.Delay(EventManager.Fire_OnLevelCompleted, 1.5f);
+            NAEngine.Delay(EventManager.Fire_OnLevelCompleted, 1.4f);
 
             if (moneyType == MoneyType.Fake)
             {
@@ -97,14 +73,15 @@ public class Money : MovementController
 
     
 
-    void MoveAnimation(Transform tr, float z)
+    void MoveAnimation(Transform tr, string animParam)
     {
         isFinish = true;
-        mT.DOMoveX(tr.position.x, 0.2f);
-        mT.DORotate(Vector3.up * (-90), 0.3f);
-        NAEngine.Delay(() => mT.DOMoveZ(z, 0.7f), 0.3f);
+        GetComponent<BoxCollider>().enabled = false;
+        mT.DORotate(Vector3.up * (-90), 0.2f);
+        NAEngine.DoubleCheckpointMove(mT, tr.position + Vector3.back * 10, tr.position, 500, 20);
+        tr.GetComponent<Animator>().SetTrigger(animParam);
+        Destroy(gameObject, 1.6f);
 
-        
     }
 
 
