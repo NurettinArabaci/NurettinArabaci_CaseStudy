@@ -101,5 +101,46 @@ public class NAEngine : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// You can turn your children's active off or on with delay.
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    public static Coroutine ChildActive(Transform tr, float delay, bool state)
+    {
+        return instance.StartCoroutine(instance.ChildActiveCR(tr, delay, state));
+    }
+
+    IEnumerator ChildActiveCR(Transform _tr, float _delay, bool _state)
+    {
+        for (int i = 0; i < _tr.childCount; i++)
+        {
+            yield return new WaitForSeconds(i * _delay);
+            _tr.GetChild(i).gameObject.SetActive(_state);
+        }
+
+    }
+
+    /// <summary>
+    /// You can add the initial wait time to the Child Active method.
+    /// </summary>
+
+    public static Coroutine ChildActive_Wait(Transform tr, float delay, bool state,float waitTime)
+    {
+        return instance.StartCoroutine(instance.ChildActive_WaitCR(tr, delay, state, waitTime));
+    }
+
+    IEnumerator ChildActive_WaitCR(Transform _tr, float _delay, bool _state, float _waitTime)
+    {
+        yield return new WaitForSeconds(_waitTime);
+        for (int i = 0; i < _tr.childCount; i++)
+        {
+            yield return new WaitForSeconds(i * _delay);
+            _tr.GetChild(i).gameObject.SetActive(_state);
+        }
+
+    }
+
 }
 
