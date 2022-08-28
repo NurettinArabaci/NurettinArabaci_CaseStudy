@@ -29,6 +29,10 @@ public class Arrow : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         mT.localRotation = Quaternion.Euler(0, 0, (int)arrowType);
     }
+    private void Start()
+    {
+        GamePanel.arrowAmount++;
+    }
 
     private void OnEnable()
     {
@@ -40,8 +44,26 @@ public class Arrow : MonoBehaviour
         rb2d.velocity = Vector2.zero;
         mT.DOLocalMoveY(300, 0.6f);
         img.DOColor(Color.clear, 0.6f);
-
+        
         Destroy(gameObject, 1);
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Tags.FinishLine))
+        {
+            Destroy(gameObject, 0.5f);
+        }
+    }
+
+    private void OnDisable()
+    {
+
+        GamePanel.arrowAmount--;
+        if (GamePanel.arrowAmount<=0)
+        {
+            EventManager.Fire_OnLevelCompleted();
+        }
     }
 }

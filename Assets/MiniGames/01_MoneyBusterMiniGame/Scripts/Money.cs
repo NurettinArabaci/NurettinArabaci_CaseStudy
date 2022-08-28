@@ -54,8 +54,6 @@ public class Money : MovementController
 
             MoveAnimation(other.transform, AnimParam.MoneyShredStart);
 
-            NAEngine.Delay(EventManager.Fire_OnLevelCompleted, 1.4f);
-
             if (moneyType == MoneyType.Fake)
             {
                 
@@ -80,6 +78,8 @@ public class Money : MovementController
         mT.DORotate(Vector3.up * (-90), 0.2f);
         NAEngine.DoubleCheckpointMove(mT, tr.position + Vector3.back * 10, tr.position, 500, 20);
         tr.GetComponent<Animator>().SetTrigger(animParam);
+
+        NAEngine.Delay(() => EventManager.Fire_OnLevelCompleted(), 2);
         Destroy(gameObject, 1.6f);
 
     }

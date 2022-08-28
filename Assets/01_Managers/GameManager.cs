@@ -21,5 +21,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EventManager.Fire_OnLevelCompleted();
+        }
+    }
+
 
 }

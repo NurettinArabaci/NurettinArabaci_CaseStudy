@@ -11,13 +11,13 @@ public class HandHeldVacuum : MovementController
 {
     Vector3 lookPose;
 
-    bool changed = false;
+    static bool changed;
 
     protected override void Awake()
     {
-        base.Awake();
-
         EventManager.OnChangeVacuum += OnChangeVacuum;
+        base.Awake();
+        changed = false;
 
         lookPose = new Vector3(-5f, 0f, 4f);
 
@@ -33,11 +33,12 @@ public class HandHeldVacuum : MovementController
         GetComponent<Collider>().enabled = false;
         NAEngine.MoveBySpeed(mT, Vector3.up * 20, 100);
         
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 1f);
     }
 
     protected override void OnMouseDrag()
     {
+        if (changed) return;
         base.OnMouseDrag();
         mT.LookAt(lookPose);
        
@@ -53,9 +54,7 @@ public class HandHeldVacuum : MovementController
     {
         if (other.CompareTag("Chips"))
         {
-            Chips chips = other.GetComponent<Chips>();
-
-            chips.OnClean();
+            other.GetComponent<Chips>().OnClean();           
         }
     }
 

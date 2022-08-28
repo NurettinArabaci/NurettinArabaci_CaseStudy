@@ -7,11 +7,12 @@ public class WaterVacuum : MovementController
 {
     P3dChannelCounter counter;
 
-    bool cleanComplete = false;
+    static bool cleanComplete;
 
     protected override void Awake()
     {
         base.Awake();
+        cleanComplete = false;
 
         counter = GetComponent<P3dChannelCounter>();
 
@@ -20,19 +21,42 @@ public class WaterVacuum : MovementController
         minX = -5;
         maxX = 3;
 
+        EventManager.OnChangeVacuum += OnChangeVacuum;
+
+    }
+    protected override void OnMouseDrag()
+    {
+        if(cleanComplete)return; 
+        base.OnMouseDrag();
     }
 
     protected override void OnMouseUp() { }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (counter.RatioA <= 0 || cleanComplete) return;
 
-        else if (counter.RatioA < 0.001f)
+        else if (counter.RatioA < 0.002f)
         {
-            Debug.Log("LevelCompleted");
+            NAEngine.MoveBySpeed(mT, Vector3.up * 7, 100);
+            EventManager.Fire_OnLevelCompleted();
             cleanComplete = true;
-            
+
         }
     }
+
+    void OnChangeVacuum()
+    {
+       
+        NAEngine.MoveBySpeed(mT, Vector3.up*7, 100);
+
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnChangeVacuum -= OnChangeVacuum;
+
+    }
+
+
 }
