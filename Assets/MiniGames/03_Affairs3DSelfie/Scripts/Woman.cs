@@ -112,6 +112,7 @@ public class Woman : MonoBehaviour
     void Correct()
     {
         mAnim.SetTrigger(AnimationParameter());
+        EventManager.Fire_OnCoinUpdate(10);
         EventManager.Fire_OnCorrect();
     }
 

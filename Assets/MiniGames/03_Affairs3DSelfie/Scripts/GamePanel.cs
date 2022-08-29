@@ -11,10 +11,15 @@ public class GamePanel : MonoBehaviour
     private void Awake()
     {
         arrowAmount = 0;
-        EventManager.OnStartGame += () => gameBG.SetActive(true);
+        EventManager.OnStartGame += GameActive;
     }
 
-    private void OnDisable() => EventManager.OnStartGame -= () => gameBG.SetActive(true);
+    void GameActive()
+    {
+        gameBG.SetActive(true);
+    }
+
+    private void OnDisable() => EventManager.OnStartGame -= GameActive;
 
 
 }

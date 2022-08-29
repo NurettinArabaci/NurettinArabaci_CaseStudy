@@ -21,6 +21,8 @@ public class PictureSpawner : MonoBehaviour
         int rand = Random.Range(-2, 3);
         GameObject go= Instantiate(_prefab, transform.position, Quaternion.Euler(0, 0, rand * 5), transform);
         go.transform.DOScale(1, 0.2f).SetEase(Ease.OutFlash);
+
+        Flash.FlashEffect();
     }
 
     private void OnDisable()

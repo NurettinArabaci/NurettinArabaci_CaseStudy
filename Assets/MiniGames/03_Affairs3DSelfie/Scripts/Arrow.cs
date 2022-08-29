@@ -51,7 +51,7 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Tags.FinishLine))
+        if (collision.CompareTag(Tags.Finish))
         {
             Destroy(gameObject, 0.5f);
         }

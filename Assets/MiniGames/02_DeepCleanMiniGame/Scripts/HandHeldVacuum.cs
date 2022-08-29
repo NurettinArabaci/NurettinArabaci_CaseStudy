@@ -32,7 +32,9 @@ public class HandHeldVacuum : MovementController
         changed = true;
         GetComponent<Collider>().enabled = false;
         NAEngine.MoveBySpeed(mT, Vector3.up * 20, 100);
-        
+
+        EventManager.Fire_OnCoinUpdate(50);
+
         Destroy(gameObject, 1f);
     }
 
