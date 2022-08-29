@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     {
         Level++;
         ConfettiControl.PlayConfetti();
-        CurrentLevelText.Visible(false);
+        EventManager.Fire_OnLevelTextVisible(false);
         EventManager.Fire_OnCoinVisible(false);
         NAEngine.Delay(() => LevelLoad(),3f);
     }
@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
         }
 
         Instantiate(levelPrefabs[Level % levelPrefabs.Length]);
-        CurrentLevelText.Visible(true);
+        EventManager.Fire_OnLevelTextVisible(true);
         EventManager.Fire_OnCoinVisible(true);
     }
 
